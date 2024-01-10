@@ -7,38 +7,42 @@ code = 0
 found_numbers = []
 
 for word in words:
-
     ai = 0
     bi = len(word) - 1
 
     a = word[ai]
     b = word[bi]
 
-    afound = None
-    bfound = None
+    aFound = False
+    bFound = False
+
+    aNum = 0
+    bNum = 0
 
     print(f"\nFinding numbers in word ({ word })...")
 
-    while(ai <= bi and (afound is None or bfound is None)):
+    while(ai <= bi and (not aFound or not bFound)):
         try:
-            if afound is None:
+            if not aFound:
                 # check for string digit
-                afound = int(a)
-                print(f"..found A ({afound})...")
+                aNum = int(a)
+                aFound = True
+                print(f"..found A ({ aNum })...")
         except Exception as e:
             ai = ai + 1
             a = word[ai]
 
         try:
-            if bfound is None:
+            if not bFound:
                 # check for string digit
-                bfound = int(b)
-                print(f"..found B ({bfound})...")
+                bNum = int(b)
+                bFound = True
+                print(f"..found B ({ bNum })...")
         except Exception as e:
             bi = bi - 1
             b = word[bi]
 
-    found_numbers.append(int(f"{afound}{bfound}"))
+    found_numbers.append(int(f"{ aNum }{ bNum }"))
 
 code = sum(found_numbers)
 print(f"\nWe have found the code, it is: { code }")
